@@ -25,4 +25,5 @@
     <string name="formatted_date_time">%1$s %2$s</string>
     <string name="delete_song">The Song You Selected Has Been Deleted!</string>
     <string name="search_hint">Please Enter a Singer Name!</string>
+    <string name="detail">Detail</string>
 </resources>
