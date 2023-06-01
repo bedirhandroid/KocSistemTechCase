@@ -3,6 +3,7 @@ package com.bedirhandroid.kocsistemtechcase.base
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.bedirhandroid.kocsistemtechcase.util.LocalDataManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.launch
@@ -15,7 +16,6 @@ import kotlin.coroutines.EmptyCoroutineContext
 abstract class BaseViewModel : ViewModel() {
     val errorLiveData: MutableLiveData<ErrorMessages> = MutableLiveData()
     val showProgress: MutableLiveData<Boolean> = MutableLiveData()
-
 
     //inline coroutines scope
     protected inline fun sendRequest(

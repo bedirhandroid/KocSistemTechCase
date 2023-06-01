@@ -5,8 +5,10 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.bedirhandroid.kocsistemtechcase.network.ApiService
 import com.bedirhandroid.kocsistemtechcase.network.responses.DataModel
+import com.bedirhandroid.kocsistemtechcase.network.responses.DataResponse
 import com.bedirhandroid.kocsistemtechcase.paging.PagingListAdapter
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class Repo @Inject constructor(private val apiService : ApiService) {
@@ -19,6 +21,12 @@ class Repo @Inject constructor(private val apiService : ApiService) {
             ),
             pagingSourceFactory = { PagingListAdapter(apiService, term) }
         ).flow
+    }
+
+    suspend fun getStaticList() : Flow<DataResponse?> {
+        return flow {
+            emit(apiService.getStaticList())
+        }
     }
 
 

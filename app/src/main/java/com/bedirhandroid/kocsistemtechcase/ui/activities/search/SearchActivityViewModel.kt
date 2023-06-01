@@ -1,6 +1,5 @@
 package com.bedirhandroid.kocsistemtechcase.ui.activities.search
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.bedirhandroid.kocsistemtechcase.base.BaseViewModel
 import com.bedirhandroid.kocsistemtechcase.base.Repo

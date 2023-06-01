@@ -24,23 +24,25 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding, DashboardViewMo
         )
     }
 
-    override fun initListeners() {
-
-    }
+    override fun initListeners() {}
 
     override fun initObservers() {
         viewModelScope {
             viewLifecycleOwner.lifecycleScope.launch {
-                getList(LocalDataManager.getInstance().localKey ?: KEY_DEFAULT_QUERY).collectLatest { _data ->
+                getList(
+                    LocalDataManager.getInstance().localKey ?: KEY_DEFAULT_QUERY
+                ).collectLatest { _data ->
                     listAdapter.submitData(_data)
                 }
             }
         }
     }
 
-    private fun onClickItem(data : DataModel) {
+    private fun onClickItem(data: DataModel) {
         Bundle().apply {
             putSerializable(KEY_DETAIL_DATA, data)
-        }.also { navigateWithBundleTo(R.id.action_navigation_dashboard_to_detailFragment,it) }
+        }.also {
+            navigateWithBundleTo(R.id.action_navigation_dashboard_to_detailFragment, it)
+        }
     }
 }

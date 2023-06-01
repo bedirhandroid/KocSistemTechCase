@@ -2,12 +2,15 @@ package com.bedirhandroid.kocsistemtechcase.ui.fragments.local
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import com.bedirhandroid.kocsistemtechcase.base.BaseViewModel
+import com.bedirhandroid.kocsistemtechcase.base.ErrorMessages
+import com.bedirhandroid.kocsistemtechcase.base.Repo
+import com.bedirhandroid.kocsistemtechcase.network.responses.DataModel
+import com.bedirhandroid.kocsistemtechcase.util.LocalDataManager
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class LocalListViewModel : ViewModel() {
+@HiltViewModel
+class LocalListViewModel @Inject constructor(private val repo: Repo) : BaseViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
-    }
-    val text: LiveData<String> = _text
 }

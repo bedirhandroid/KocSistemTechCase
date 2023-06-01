@@ -16,7 +16,7 @@ class ListAdapter(private val clickItem: (DataModel) -> Unit): PagingDataAdapter
             binding.apply {
                 tvArtistName.text = data.artistName
                 tvTrackName.text = data.trackName
-                ivPhoto.loadImage(data.artworkUrl100)
+                data.artworkUrl100?.let(ivPhoto::loadImage)
             }
         }
     }

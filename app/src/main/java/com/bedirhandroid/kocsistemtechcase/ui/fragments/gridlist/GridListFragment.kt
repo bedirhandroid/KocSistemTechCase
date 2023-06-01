@@ -1,42 +1,51 @@
 package com.bedirhandroid.kocsistemtechcase.ui.fragments.gridlist
 
+import DynamicLayoutAdapter
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import com.bedirhandroid.kocsistemtechcase.databinding.FragmentNotificationsBinding
+import com.bedirhandroid.kocsistemtechcase.R
+import com.bedirhandroid.kocsistemtechcase.base.BaseFragment
+import com.bedirhandroid.kocsistemtechcase.databinding.FragmentGridListBinding
+import com.bedirhandroid.kocsistemtechcase.network.responses.DataModel
+import com.bedirhandroid.kocsistemtechcase.util.Constant
+import com.bedirhandroid.kocsistemtechcase.util.LocalDataManager
+import com.bedirhandroid.kocsistemtechcase.util.navigateWithBundleTo
+import com.bedirhandroid.kocsistemtechcase.util.visible
 
-class GridListFragment : Fragment() {
 
-    private var _binding: FragmentNotificationsBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        val notificationsViewModel =
-            ViewModelProvider(this).get(GridListViewModel::class.java)
-
-        _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-        val textView: TextView = binding.textNotifications
-        notificationsViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+class GridListFragment : BaseFragment<FragmentGridListBinding, GridListViewModel>() {
+    private lateinit var gridListAdapter: DynamicLayoutAdapter
+    override fun initView() {
+        LocalDataManager.getInstance().localListData?.let {
+            viewBindingScope {
+                gridListAdapter = DynamicLayoutAdapter(
+                    it,
+                    2,
+                    ::onClickItem
+                )
+                rvGrid.adapter = gridListAdapter
+            }
+        } ?: kotlin.run {
+            showEmptyList()
         }
-        return root
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    override fun initListeners() {}
+
+    override fun initObservers() {}
+
+    private fun onClickItem(data: DataModel) {
+        Bundle().apply {
+            putSerializable(Constant.KEY_DETAIL_DATA, data)
+        }.also {
+            navigateWithBundleTo(R.id.action_navigation_grid_list_to_detailFragment, it)
+        }
     }
+
+    private fun showEmptyList() {
+        viewBindingScope {
+            emptyListContainer.visible()
+            emptyListView.playAnimation()
+        }
+    }
+
 }

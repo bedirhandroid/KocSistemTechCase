@@ -3,11 +3,12 @@ package com.bedirhandroid.kocsistemtechcase.ui.fragments.gridlist
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.bedirhandroid.kocsistemtechcase.base.BaseViewModel
+import com.bedirhandroid.kocsistemtechcase.base.Repo
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class GridListViewModel : ViewModel() {
+@HiltViewModel
+class GridListViewModel @Inject constructor(private val repo: Repo) : BaseViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is notifications Fragment"
-    }
-    val text: LiveData<String> = _text
 }

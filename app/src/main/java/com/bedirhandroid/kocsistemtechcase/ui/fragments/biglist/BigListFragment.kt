@@ -1,60 +1,69 @@
 package com.bedirhandroid.kocsistemtechcase.ui.fragments.biglist
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import DynamicLayoutAdapter
+import android.content.Intent
+import android.util.Log
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bedirhandroid.kocsistemtechcase.R
+import com.bedirhandroid.kocsistemtechcase.base.BaseFragment
+import com.bedirhandroid.kocsistemtechcase.databinding.FragmentBigListBinding
+import com.bedirhandroid.kocsistemtechcase.network.responses.DataModel
+import com.bedirhandroid.kocsistemtechcase.ui.activities.search.SearchActivity
+import com.bedirhandroid.kocsistemtechcase.util.LocalDataManager
+import com.bedirhandroid.kocsistemtechcase.util.showAlert
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class BigListFragment : BaseFragment<FragmentBigListBinding, BigListViewModel>() {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [BigListFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class BigListFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    private lateinit var horizontalBigListAdapter: DynamicLayoutAdapter
+    override fun initView() {
+        viewBindingScope {
+            viewModel.localData?.let {
+                horizontalBigListAdapter = DynamicLayoutAdapter(
+                    it,
+                    3,
+                    ::onClickItem,
+                    ::onDeleteItem
+                )
+                val horizontalLayoutManager =
+                    LinearLayoutManager(
+                        context,
+                        LinearLayoutManager.HORIZONTAL,
+                        false
+                    )
+                rvHorizontal.apply {
+                    layoutManager = horizontalLayoutManager
+                    adapter = horizontalBigListAdapter
+                }
+            }
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_big_list, container, false)
+    override fun initListeners() {
+
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment BigListFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            BigListFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun initObservers() {
+
+    }
+
+    private fun onClickItem(data: DataModel) {
+
+    }
+
+    private fun onDeleteItem(data: DataModel) {
+        requireContext().showAlert(getString(R.string.delete_song), getString(R.string.attention)) {
+            viewModel.localData?.remove(data)
+            LocalDataManager.getInstance().localListData = viewModel.localData
+            horizontalBigListAdapter.notifyDataSetChanged()
+            if (viewModel.localData.isNullOrEmpty()) {
+                requireActivity().apply {
+                    Intent(this, SearchActivity::class.java).also {
+                        startActivity(it)
+                        finish()
+                    }
                 }
             }
+        }
     }
+
 }

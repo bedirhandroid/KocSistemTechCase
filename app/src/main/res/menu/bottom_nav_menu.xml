@@ -8,12 +8,12 @@
         android:title="@string/title_web" />
 
     <item
-        android:id="@+id/navigation_home"
+        android:id="@+id/navigation_local_list"
         android:icon="@drawable/ic_local_list"
         android:title="@string/title_local" />
 
     <item
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_grid_list"
         android:icon="@drawable/ic_grid_list"
         android:title="@string/title_grid" />
 
