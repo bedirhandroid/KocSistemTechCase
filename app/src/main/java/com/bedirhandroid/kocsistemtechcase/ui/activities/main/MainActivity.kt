@@ -58,10 +58,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() 
         }
     }
 
-    private val localIdListObserver = Observer<Int> {
-
-    }
-
     private val staticListObserver = Observer<ArrayList<DataModel>> {
         LocalDataManager.getInstance().localListData = it
     }

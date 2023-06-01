@@ -12,8 +12,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainActivityViewModel @Inject constructor(private val repo: Repo) : BaseViewModel() {
-    val removedTrackIdList = MutableLiveData<ArrayList<Int>>()
-
     private val mutableStaticList = MutableLiveData<ArrayList<DataModel>>()
     val staticLiveData: LiveData<ArrayList<DataModel>> get() = mutableStaticList
 

@@ -2,12 +2,14 @@ package com.bedirhandroid.kocsistemtechcase.ui.fragments.local
 
 import DynamicLayoutAdapter
 import android.os.Bundle
-import androidx.lifecycle.Observer
 import com.bedirhandroid.kocsistemtechcase.R
 import com.bedirhandroid.kocsistemtechcase.base.BaseFragment
 import com.bedirhandroid.kocsistemtechcase.databinding.FragmentLocalListBinding
 import com.bedirhandroid.kocsistemtechcase.network.responses.DataModel
-import com.bedirhandroid.kocsistemtechcase.util.*
+import com.bedirhandroid.kocsistemtechcase.util.Constant
+import com.bedirhandroid.kocsistemtechcase.util.LocalDataManager
+import com.bedirhandroid.kocsistemtechcase.util.navigateWithBundleTo
+import com.bedirhandroid.kocsistemtechcase.util.visible
 
 class LocalListFragment : BaseFragment<FragmentLocalListBinding, LocalListViewModel>() {
 

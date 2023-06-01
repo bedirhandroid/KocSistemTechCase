@@ -1,6 +1,5 @@
 package com.bedirhandroid.kocsistemtechcase.ui.fragments.detail
 
-import android.util.Log
 import com.bedirhandroid.kocsistemtechcase.R
 import com.bedirhandroid.kocsistemtechcase.base.BaseFragment
 import com.bedirhandroid.kocsistemtechcase.databinding.FragmentDetailBinding
@@ -26,13 +25,9 @@ class DetailFragment : BaseFragment<FragmentDetailBinding, DetailFragmentViewMod
         }
     }
 
-    override fun initListeners() {
+    override fun initListeners() {}
 
-    }
-
-    override fun initObservers() {
-
-    }
+    override fun initObservers() {}
 
     private fun getArgs() {
         detailDataModel = arguments?.customGetSerializable(Constant.KEY_DETAIL_DATA)

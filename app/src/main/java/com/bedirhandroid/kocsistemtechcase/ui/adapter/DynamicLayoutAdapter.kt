@@ -69,16 +69,12 @@ class DynamicLayoutAdapter(
     }
 
     override fun getItemViewType(position: Int): Int {
-        val data = dataList[position]
-        // Verilere bağlı olarak görünüm türünü belirle
         return when (layoutType) {
             1 -> VIEW_TYPE_LINEAR
             2 -> VIEW_TYPE_GRID
             else -> VIEW_TYPE_HORIZONTAL
         }
     }
-
-    // ViewHolder sınıfları
 
     class ListViewHolder(val binding: ListRowBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(data: DataModel) {
