@@ -1,6 +1,6 @@
 package com.bedirhandroid.kocsistemtechcase.network.responses
 
-data class Result(
+data class DataModel(
     val artistId: Int,
     val artistName: String,
     val artistViewUrl: String,
@@ -43,4 +43,4 @@ data class Result(
     val trackTimeMillis: Int,
     val trackViewUrl: String,
     val wrapperType: String
-)
+): java.io.Serializable
