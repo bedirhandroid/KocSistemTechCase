@@ -3,4 +3,10 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+
+    <string name="error_message">Error!</string>
+    <string name="error_time_out">Time Out!</string>
+    <string name="error_try_again">Try Again!</string>
+    <string name="error_eofe">Flow Error!</string>
+    <string name="error_unknown">Unknown Error!</string>
 </resources>
