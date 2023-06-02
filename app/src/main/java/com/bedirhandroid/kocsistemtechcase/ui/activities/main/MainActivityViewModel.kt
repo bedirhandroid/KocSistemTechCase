@@ -6,7 +6,6 @@ import com.bedirhandroid.kocsistemtechcase.base.BaseViewModel
 import com.bedirhandroid.kocsistemtechcase.base.ErrorMessages
 import com.bedirhandroid.kocsistemtechcase.base.Repo
 import com.bedirhandroid.kocsistemtechcase.network.responses.DataModel
-import com.bedirhandroid.kocsistemtechcase.util.LocalDataManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -21,13 +20,9 @@ class MainActivityViewModel @Inject constructor(private val repo: Repo) : BaseVi
 
     private fun getStaticList() {
         sendRequest {
-            LocalDataManager.getInstance().localListData?.let {
-                mutableStaticList.postValue(it)
-            } ?: kotlin.run {
-                repo.getStaticList().collect {
-                    it?.let { _data -> mutableStaticList.postValue(_data.results) } ?: kotlin.run {
-                        errorLiveData.postValue(ErrorMessages.ERROR)
-                    }
+            repo.getStaticList().collect {
+                it?.let { _data -> mutableStaticList.postValue(_data.results) } ?: kotlin.run {
+                    errorLiveData.postValue(ErrorMessages.ERROR)
                 }
             }
         }
